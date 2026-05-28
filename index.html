@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CPIT-455 Software Engineering II Portfolio - HIMMA Curriculum" />
+  <title>Portfolio | Rami Jameel AlIeli — CPIT-455</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #112240;
+      --navy-light: #1d3461;
+      --teal: #00c9a7;
+      --teal-dim: #00c9a720;
+      --teal-mid: #00c9a750;
+      --gold: #f5a623;
+      --gold-dim: #f5a62320;
+      --white: #e8f0fe;
+      --white-dim: #e8f0fe80;
+      --muted: #8892b0;
+      --card-bg: #112240cc;
+      --border: #1d3461;
+      --font: 'Sora', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .5;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      background: #0a162890;
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: .85rem;
+      color: var(--teal);
+      letter-spacing: .1em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 10% 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,201,167,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,201,167,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #00c9a715 0%, transparent 70%);
+      top: -150px; right: -150px;
+      pointer-events: none;
+    }
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--teal);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 40px; height: 1px;
+      background: var(--teal);
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -.02em;
+    }
+    .hero h1 span { color: var(--teal); }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-id {
+      font-family: var(--mono);
+      font-size: .8rem;
+      color: var(--gold);
+      background: var(--gold-dim);
+      border: 1px solid var(--gold);
+      padding: .35rem .9rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 2.5rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .stat-label { font-size: .75rem; color: var(--muted); margin-top: .25rem; text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 6rem 10%;
+      position: relative;
+    }
+    .section-tag {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--teal);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: .5rem;
+      letter-spacing: -.01em;
+    }
+    .section-subtitle {
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+    .divider {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--teal), transparent);
+      margin-bottom: 3rem;
+      border-radius: 2px;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--white-dim);
+      font-size: .95rem;
+      margin-bottom: 1.2rem;
+    }
+    .info-table { margin-top: 2rem; }
+    .info-row {
+      display: flex;
+      gap: 1rem;
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .85rem;
+    }
+    .info-key { color: var(--muted); min-width: 120px; }
+    .info-val { color: var(--white); font-weight: 500; }
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: 2rem;
+    }
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: .7rem;
+      padding: .3rem .75rem;
+      border: 1px solid var(--teal);
+      color: var(--teal);
+      border-radius: 3px;
+      background: var(--teal-dim);
+    }
+
+    /* ─── EVIDENCE WEEKS ─── */
+    .weeks-container { display: flex; flex-direction: column; gap: 2rem; }
+    .week-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+    .week-card:hover { border-color: var(--teal); }
+    .week-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      background: #1d346120;
+    }
+    .week-num {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--teal);
+      background: var(--teal-dim);
+      border: 1px solid var(--teal-mid);
+      padding: .3rem .7rem;
+      border-radius: 4px;
+      min-width: 100px;
+      text-align: center;
+    }
+    .week-title-wrap { flex: 1; }
+    .week-class-tag {
+      font-family: var(--mono);
+      font-size: .65rem;
+      color: var(--gold);
+      margin-bottom: .2rem;
+    }
+    .week-main-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .week-topics {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .2rem;
+    }
+    .week-body {
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .evidence-label {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--teal);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .evidence-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .evidence-content {
+      color: var(--white-dim);
+      font-size: .9rem;
+      line-height: 1.8;
+    }
+    .evidence-content p { margin-bottom: .8rem; }
+    .evidence-content ul { margin: .8rem 0 .8rem 1.5rem; }
+    .evidence-content li { margin-bottom: .4rem; }
+    .evidence-content strong { color: var(--white); }
+
+    /* ─── PROJECT ─── */
+    .project-banner {
+      background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-banner::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #00c9a710, transparent 70%);
+      pointer-events: none;
+    }
+    .project-name {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--teal);
+      margin-bottom: .3rem;
+    }
+    .project-tagline {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 1.5rem;
+    }
+    .project-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .meta-badge {
+      font-family: var(--mono);
+      font-size: .72rem;
+      padding: .3rem .8rem;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+    .meta-badge.domain { color: var(--teal); border-color: var(--teal); background: var(--teal-dim); }
+    .meta-badge.team { color: var(--gold); border-color: var(--gold); background: var(--gold-dim); }
+    .project-desc {
+      color: var(--white-dim);
+      font-size: .9rem;
+      max-width: 700px;
+      line-height: 1.8;
+    }
+
+    .dep-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .dep-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .dep-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+    .dep-icon { font-size: 1.5rem; margin-bottom: .75rem; }
+    .dep-title { font-size: .8rem; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .4rem; }
+    .dep-value { font-family: var(--mono); font-size: .75rem; color: var(--gold); margin-bottom: .4rem; }
+    .dep-desc { font-size: .78rem; color: var(--muted); }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .arch-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .arch-card h4 { font-size: .85rem; font-weight: 700; color: var(--white); margin-bottom: .75rem; display: flex; align-items: center; gap: .5rem; }
+    .arch-card h4 span { color: var(--teal); }
+    .arch-card p { font-size: .82rem; color: var(--muted); }
+
+    /* ─── FTA DIAGRAM ─── */
+    .fta-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .fta-title { font-size: 1rem; font-weight: 700; margin-bottom: 2rem; color: var(--teal); }
+    .fta-tree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .fta-node {
+      background: var(--navy-light);
+      border: 2px solid var(--teal);
+      border-radius: 8px;
+      padding: .8rem 1.5rem;
+      text-align: center;
+      font-size: .82rem;
+      font-weight: 600;
+      min-width: 200px;
+      position: relative;
+    }
+    .fta-node.top { background: #00c9a720; border-color: var(--teal); color: var(--teal); }
+    .fta-node.cause { background: #f5a62315; border-color: var(--gold); color: var(--gold); min-width: 160px; }
+    .fta-node.mitigation { background: #0a162870; border-color: #4caf50; color: #81c784; min-width: 220px; font-size: .75rem; font-weight: 400; }
+    .fta-gate {
+      background: var(--navy-mid);
+      border: 2px solid var(--muted);
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--white);
+      font-weight: 700;
+    }
+    .fta-row { display: flex; gap: 2rem; align-items: flex-start; justify-content: center; }
+    .fta-line {
+      width: 2px;
+      height: 24px;
+      background: var(--muted);
+      margin: 0 auto;
+    }
+    .fta-branches {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .fta-branch { display: flex; flex-direction: column; align-items: center; }
+    .fta-h-line {
+      height: 2px;
+      width: 120px;
+      background: var(--muted);
+      margin-top: 22px;
+    }
+
+    /* ─── ALARP ─── */
+    .alarp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+    }
+    .alarp-card {
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid;
+    }
+    .alarp-card.intolerable { background: #e53e3e15; border-color: #e53e3e; }
+    .alarp-card.region { background: #f5a62315; border-color: var(--gold); }
+    .alarp-card.acceptable { background: #4caf5015; border-color: #4caf50; }
+    .alarp-card h4 { font-size: .8rem; font-weight: 700; margin-bottom: .6rem; }
+    .alarp-card.intolerable h4 { color: #fc8181; }
+    .alarp-card.region h4 { color: var(--gold); }
+    .alarp-card.acceptable h4 { color: #81c784; }
+    .alarp-card p { font-size: .78rem; color: var(--muted); margin-bottom: .5rem; }
+    .alarp-card .mitigation-text { font-size: .75rem; font-style: italic; color: var(--white-dim); }
+
+    /* ─── REUSE TABLE ─── */
+    .reuse-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .reuse-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      transition: border-color .2s;
+    }
+    .reuse-card:hover { border-color: var(--teal); }
+    .reuse-card h4 { font-size: .82rem; font-weight: 700; color: var(--white); margin-bottom: .4rem; }
+    .reuse-card p { font-size: .75rem; color: var(--muted); }
+
+    /* ─── PROJECT EVIDENCE (INDIVIDUAL) ─── */
+    .individual-box {
+      background: linear-gradient(135deg, #00c9a710, transparent);
+      border: 1px solid var(--teal-mid);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    .individual-box h3 {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .individual-box p {
+      font-size: .9rem;
+      color: var(--white-dim);
+      line-height: 1.8;
+    }
+
+    /* ─── REFLECTION ─── */
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .reflect-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.8rem;
+    }
+    .reflect-card h4 { font-size: .85rem; font-weight: 700; color: var(--teal); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
+    .reflect-card blockquote {
+      border-left: 3px solid var(--teal);
+      padding-left: 1rem;
+      font-style: italic;
+      font-size: .88rem;
+      color: var(--white-dim);
+      line-height: 1.8;
+    }
+    .hstack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .hstack-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+    .hstack-card .icon { font-size: 1.5rem; margin-bottom: .5rem; }
+    .hstack-card h4 { font-size: .78rem; font-weight: 700; color: var(--white); margin-bottom: .3rem; }
+    .hstack-card p { font-size: .72rem; color: var(--muted); }
+
+    /* ─── CONTACT ─── */
+    .contact-section { background: var(--navy-mid); border-top: 1px solid var(--border); }
+    .contact-grid {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .75rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--white);
+      background: var(--card-bg);
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .contact-btn:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
+    .contact-btn.primary { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: .75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+    }
+    footer span { color: var(--teal); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 5%; }
+      .hero { padding: 7rem 5% 3rem; }
+      .about-grid, .arch-grid, .reflection-grid { grid-template-columns: 1fr; }
+      .alarp-grid { grid-template-columns: 1fr; }
+      .reuse-grid { grid-template-columns: 1fr 1fr; }
+      .hstack-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero > * { animation: fadeUp .7s ease both; }
+    .hero > *:nth-child(1) { animation-delay: .1s; }
+    .hero > *:nth-child(2) { animation-delay: .2s; }
+    .hero > *:nth-child(3) { animation-delay: .3s; }
+    .hero > *:nth-child(4) { animation-delay: .4s; }
+    .hero > *:nth-child(5) { animation-delay: .5s; }
+    .hero > *:nth-child(6) { animation-delay: .6s; }
+
+    /* warning badge */
+    .warning-note {
+      background: #f5a62315;
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      padding: .7rem 1.2rem;
+      font-size: .78rem;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      font-family: var(--mono);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-logo">rami.portfolio // v1</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#evidence">Evidence</a></li>
+      <li><a href="#project">Project</a></li>
+      <li><a href="#graduation">Grad Project</a></li>
+      <li><a href="#kashta">Kashta</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="home">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-tag">CPIT-455 · HIMMA Curriculum · KAU</div>
+    <h1>Rami Jameel<br/><span>AlIeli</span></h1>
+    <div class="hero-sub">Software Engineering II Portfolio — Building dependable systems, one proof at a time.</div>
+    <div class="hero-id">Student ID: 2244105</div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">16</div>
+        <div class="stat-label">Weeks</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">V1</div>
+        <div class="stat-label">Current Iteration</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Team Members</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Live Projects</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="section-tag">// 01 · about me</div>
+    <h2 class="section-title">👤 About Me</h2>
+    <div class="divider"></div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am an Information Technology student at King Abdulaziz University, enrolled in <strong>CPIT-455 Software Engineering II</strong> under the HIMMA curriculum — a program that moves beyond passive learning toward active, provable engineering.</p>
+        <p>My goal is to become not just a programmer, but an engineer who understands <strong>dependability, safety, reliability</strong>, and the human responsibility that comes with building systems others trust.</p>
+        <p>This portfolio documents every week of effort — small proofs that compound into professional-grade evidence of real engineering thinking. Every design decision is justified, traceable, and built to last.</p>
+
+        <div class="info-table">
+          <div class="info-row"><span class="info-key">University</span><span class="info-val">King Abdulaziz University</span></div>
+          <div class="info-row"><span class="info-key">Major</span><span class="info-val">Information Technology</span></div>
+          <div class="info-row"><span class="info-key">Year</span><span class="info-val">2026 — Semester 2</span></div>
+          <div class="info-row"><span class="info-key">Course</span><span class="info-val">CPIT-455 Software Engineering II</span></div>
+          <div class="info-row"><span class="info-key">Instructor</span><span class="info-val">Dr. Adeeb Noor — IT Department, FCIT</span></div>
+          <div class="info-row"><span class="info-key">Student ID</span><span class="info-val">2244105</span></div>
+          <div class="info-row"><span class="info-key">Domain Focus</span><span class="info-val">Dependable Systems & E-Commerce Engineering</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="skills-grid">
+          <span class="skill-tag">Software Architecture</span>
+          <span class="skill-tag">Fault Tree Analysis</span>
+          <span class="skill-tag">Risk Assessment</span>
+          <span class="skill-tag">ALARP</span>
+          <span class="skill-tag">Safety Engineering</span>
+          <span class="skill-tag">Dependability</span>
+          <span class="skill-tag">React.js</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Supabase</span>
+          <span class="skill-tag">UML</span>
+          <span class="skill-tag">System Design</span>
+          <span class="skill-tag">V&V Testing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EVIDENCE ── -->
+  <section id="evidence" style="background: #0d1e3a40;">
+    <div class="section-tag">// 02 · weekly evidence</div>
+    <h2 class="section-title">📂 Weekly Evidence</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">Evidence = Clear Thinking, not perfection. Each week I produce a focused proof of learning — a diagram, an analysis, a design decision, or a reflection. This is the record.</p>
+
+    <div class="weeks-container">
+
+      <!-- WEEK 01-02 -->
+      <div class="week-card">
+        <div class="week-header">
+          <span class="week-num">WEEK 01–02</span>
+          <div class="week-title-wrap">
+            <div class="week-class-tag">CLASS 00 · The HIMMA System — Domain Spine: Dependable Systems</div>
+            <div class="week-main-title">What is Dependability? The 5 Attributes & Sources of Failure</div>
+            <div class="week-topics">Topics: Dependability = Degree of Trust · H-Stack · BUILD YOUR PROOF · Evidence Policy</div>
+          </div>
+        </div>
+        <div class="week-body">
+          <div class="evidence-label">My Evidence (V1) — Applied to Usaruna</div>
+          <div class="evidence-content">
+            <p>The course material defines dependability as <strong>"the degree of trust a user places in a system"</strong> — not as a feature you add, but as the absence of unwanted behavior. This completely changed how I think about Usaruna. Before this topic, I thought about what the system <em>should do</em>. After it, I started asking what it <em>must never do</em>.</p>
+            <p>I applied all five attributes to Usaruna and — importantly — I justified <em>why</em> each one applies, not just that it does:</p>
+            <ul>
+              <li><strong>Availability:</strong> Usaruna is a marketplace for family businesses who depend on daily sales. If the platform goes down for 2 hours on a Friday evening (peak Saudi shopping time), sellers lose real income. The user "judges availability" — they see the site is down and lose trust. This is the attribute users notice first.</li>
+              <li><strong>Reliability:</strong> This is what engineers must judge. When a buyer places an order, does the system deliver the correct service without failure over time? A duplicate charge or lost order is a reliability failure — the system deviated from its expected service even though it was technically "available." Availability asks "is it working?" Reliability asks "did it work correctly?" — this distinction is exactly what the slides emphasize.</li>
+              <li><strong>Safety:</strong> Usaruna allows food sellers. If a product listing contains no allergen information and a buyer gets harmed, the system enabled that harm. Safety means preventing the platform from causing harm to users — even if the failure is an omission, not a bug.</li>
+              <li><strong>Security:</strong> The CIA Triad applies directly: Confidentiality (payment data must not be disclosed), Integrity (order records must not be altered), Availability (a DoS attack must not take the marketplace offline). Our threat: a fraudulent seller account accessing buyer payment data.</li>
+              <li><strong>Resilience:</strong> If Moyasar (our payment gateway) goes offline, Usaruna must maintain critical services — at minimum, sellers can still receive orders and buyers can still browse. Recovery from payment failures without data loss is our key resilience requirement.</li>
+            </ul>
+            <p>This topic also made clear that most "system" failures are actually <strong>operational failures</strong> — human error and organizational misalignment. For Usaruna, this means: even if our code is perfect, a seller who uploads harmful products, or an admin who misconfigures access rules, can cause a system failure. Dependability is therefore not just a technical problem.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK 03-04 -->
+      <div class="week-card">
+        <div class="week-header">
+          <span class="week-num">WEEK 03–04</span>
+          <div class="week-title-wrap">
+            <div class="week-class-tag">CLASS 02 · Architectural Foundations of Software Dependability</div>
+            <div class="week-main-title">Reliability Engineering — Fault → Error → Failure · POFOD · ROCOF · AVAIL · 8 Commandments</div>
+            <div class="week-topics">Topics: Why does a system that meets every technical specification still fail in the eyes of the user?</div>
+          </div>
+        </div>
+        <div class="week-body">
+          <div class="evidence-label">My Evidence (V1) — The Question Dr. Adeeb Asked During the Usaruna Presentation</div>
+          <div class="evidence-content">
+            <p>During the Usaruna Iteration 1 class presentation, Dr. Adeeb stopped me and asked: <em>"How do you know your system is reliable?"</em> I answered: "Because it does what it's supposed to do." He followed up: <em>"But how do you actually know that?"</em> I had no answer at the time. This evidence is my documented proof that I now do.</p>
+            <p><strong>Reliability ≠ Availability — this is the most important distinction in the course.</strong> The slides state it precisely: users judge Availability ("is it working right now?"), but engineers must judge Reliability ("did it fail dangerously?"). A system can be available 99.9% of the time and still be unreliable — if in that uptime it processes payments incorrectly, charges the wrong amount, or creates duplicate orders, it has failed reliably. Reliability is safety-driven; it asks whether the system delivered service <em>without failure</em> over time. Availability is uptime-driven; it only asks if the system was <em>reachable</em>.</p>
+            <p><strong>Applied to Usaruna — how do I actually know the checkout is reliable?</strong> The answer is: I measure it using <strong>POFOD</strong> (Probability of Failure on Demand). Usaruna's checkout is a safety-critical, intermittent-demand system — a buyer doesn't continuously check out, they trigger the checkout event. So the right question is: out of every 1,000 checkout attempts, how many produce the wrong result? I set our target at POFOD &lt; 0.001. This is not a guess — it's derived from the fact that every failed transaction directly costs a seller a sale and destroys buyer trust.</p>
+            <p>I traced the <strong>Fault → Error → Failure chain</strong> for our payment flow:</p>
+            <ul>
+              <li><strong>Fault (the root cause / static defect):</strong> No timeout handler on the Moyasar API call in our Node.js backend.</li>
+              <li><strong>Error (the infection — incorrect internal state):</strong> The transaction state becomes ambiguous: was the payment deducted? The database doesn't know.</li>
+              <li><strong>Failure (the symptom visible to the user):</strong> Buyer sees "order failed" but money was deducted — or order succeeds but seller never gets paid.</li>
+            </ul>
+            <p>The critical insight from the slides: <em>"Faults do not always cause errors; errors do not always cause failures. A system can recover before the user notices."</em> This means our goal is to break the chain before it reaches the failure stage — specifically by adding idempotency keys on payment calls (commandment 7: Include Timeouts; commandment 3: Handle All Exceptions).</p>
+            <p>I chose <strong>POFOD over ROCOF or AVAIL</strong> for our checkout because: ROCOF applies to transaction-heavy continuous systems (like SAMA banking, which processes thousands of transactions per minute). AVAIL applies to uptime-critical repairable systems (like STC telecom). Usaruna's checkout is neither — it's triggered per-order, safety-critical per event. POFOD is the correct metric because it measures success per request, not frequency or uptime.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK 05-06 -->
+      <div class="week-card">
+        <div class="week-header">
+          <span class="week-num">WEEK 05–06</span>
+          <div class="week-title-wrap">
+            <div class="week-class-tag">CLASS 03 · Safety Engineering</div>
+            <div class="week-main-title">Hazard Analysis · ALARP · Fault Tree Analysis · Safety vs. Security</div>
+            <div class="week-topics">Topics: Safety assumes accidents. Security assumes deliberate malice.</div>
+          </div>
+        </div>
+        <div class="week-body">
+          <div class="evidence-label">My Evidence (V1) — Applied to Usaruna</div>
+          <div class="evidence-content">
+            <p>One of the sharpest distinctions in this course came from this topic: in the course: <strong>Safety vs. Security</strong>. Safety's environment is benign — failures come from accidents, physical wear, or code errors. Security's environment is hostile — failures come from intelligent, adaptive adversaries who actively probe your defenses until they break. For Usaruna, both apply at different layers.</p>
+            <p><strong>Safety Analysis — Hazard → Accident → Damage:</strong> I identified a food product listing without allergen warnings as Usaruna's critical safety scenario:</p>
+            <ul>
+              <li><strong>Hazard:</strong> Seller uploads homemade food without declaring it contains peanuts.</li>
+              <li><strong>Accident:</strong> Buyer with peanut allergy purchases the product unaware of the risk.</li>
+              <li><strong>Damage:</strong> Severe allergic reaction, legal liability, platform trust destroyed permanently.</li>
+            </ul>
+            <p>My protection system: a mandatory allergen checkbox for all food-category listings, enforced at the application layer before publish — not just a UI suggestion. This is a protection system that breaks the hazard chain between Hazard and Accident, before any damage can occur.</p>
+            <p><strong>ALARP Application to Usaruna:</strong></p>
+            <ul>
+              <li><strong>Intolerable (must be designed out):</strong> Payment data leak. A buyer's credit card data being exposed is never acceptable under any cost analysis. Mitigation: Moyasar tokenization (we never store raw card data) + Supabase RLS policies (database rows are access-controlled per user role).</li>
+              <li><strong>ALARP Region (acceptable with conditions):</strong> System downtime during Ramadan peak hours. We cannot guarantee zero downtime, but we can minimize it. Mitigation: reliable cloud hosting + load balancing. This risk is in the ALARP region because the cost of eliminating it completely (fully redundant multi-region infrastructure) exceeds the startup budget.</li>
+              <li><strong>Acceptable Risk:</strong> A seller receiving a fake 1-star review from a buyer who never purchased. Low damage impact, mitigated by: only verified buyers who completed a purchase can leave reviews.</li>
+            </ul>
+            <p>The key insight that changed my thinking: <strong>"Safety assumes accidents. Security assumes deliberate malice. An attacker will actively probe your defenses until they break."</strong> This means I cannot design Usaruna's security the same way I design its safety. For safety, I design for what could go wrong by accident. For security, I must design for what an adversary will intentionally try — Misuse Cases, not just Use Cases.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK 07-08 -->
+      <div class="week-card">
+        <div class="week-header">
+          <span class="week-num">WEEK 07–08</span>
+          <div class="week-title-wrap">
+            <div class="week-class-tag">CLASS 05 · Engineering for Security — Critical Systems Design</div>
+            <div class="week-main-title">CIA Triad · Threat Analysis · Misuse Cases · 10 Design Guidelines · Security Assurance</div>
+            <div class="week-topics">Key Question: Why is it impossible to mathematically prove a system is completely secure?</div>
+          </div>
+        </div>
+        <div class="week-body">
+          <div class="evidence-label">My Evidence (V1) — Applied to Usaruna</div>
+          <div class="evidence-content">
+            <p>This topic opens with a key question: <em>"Why is it impossible to mathematically prove that a system is completely secure?"</em> The answer the slides give: because security requires proving a negative — proving your system <em>shall not</em> do something. Proving all the ways a system will fail is impossible because attackers are intelligent, adaptive adversaries who find paths you haven't modeled yet.</p>
+            <p><strong>The CIA Triad applied to Usaruna:</strong></p>
+            <ul>
+              <li><strong>Confidentiality:</strong> Buyer payment data and seller banking details must never be disclosed. Threat: a malicious seller extracts another seller's payout information. Control: Supabase RLS (Row Level Security) ensures each seller can only read their own records — enforced at the database level, not just the application level.</li>
+              <li><strong>Integrity:</strong> Order records, payment confirmations, and product listings must not be altered. Threat: a buyer modifies the price field in a request before it hits our API. Control: server-side price validation — the backend recalculates the price from our database, never trusting the client-submitted amount.</li>
+              <li><strong>Availability:</strong> The slides note that "if availability falls, integrity often follows" — a DoS attack on our API not only takes down the marketplace but forces emergency patches that could introduce new vulnerabilities. Control: rate limiting on API endpoints, Supabase's built-in DDoS protection.</li>
+            </ul>
+            <p><strong>Misuse Case Analysis — designing for what users should NOT be able to do:</strong> The principle is clear: "you cannot just design for what users should do. You must explicitly model deductive, malicious interactions." For Usaruna, I identified:</p>
+            <ul>
+              <li><strong>Intended Use:</strong> Buyer places order → payment processed → seller notified.</li>
+              <li><strong>Misuse 1:</strong> Attacker creates a fake seller account → lists non-existent products → collects payments → disappears. Control: seller identity verification before first listing is published; payment holds for new sellers for the first 7 days.</li>
+              <li><strong>Misuse 2:</strong> Competitor scrapes all seller product pricing data via repeated API calls. Control: rate limiting + authenticated API access only.</li>
+            </ul>
+            <p>From the 10 Design Guidelines, I applied <strong>Guideline 3 (Fail Securely)</strong> directly: if our Supabase authentication service goes down, users must be locked out (default to deny), not allowed in. A failed auth check must never default to "allowed." This is a design decision I documented for our backend.</p>
+            <p>The security summary that I carry into every design decision: <strong>"In security engineering, you must assume the environment is hostile. The burden of proof is on the engineer."</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK 09-10 -->
+      <div class="week-card">
+        <div class="week-header">
+          <span class="week-num">WEEK 09–10</span>
+          <div class="week-title-wrap">
+            <div class="week-class-tag">CLASS 06 · Resilience Engineering — Chapter 14</div>
+            <div class="week-main-title">Cybersecurity · Sociotechnical Resilience · Swiss Cheese Model · R&R Strategies · Resilient Systems Design</div>
+            <div class="week-topics">Topics: Recognition → Resistance → Recovery → Reinstatement · People are the foundation, not weakness</div>
+          </div>
+        </div>
+        <div class="week-body">
+          <div class="evidence-label">My Evidence (V1) — Applied to Usaruna</div>
+          <div class="evidence-content">
+            <p>The core definition Dr. Adeeb emphasized: <em>"The resilience of a system is a judgment of how well that system can maintain the continuity of its critical services in the presence of disruptive events."</em> This is different from reliability (does it work correctly?) and availability (is it up?). Resilience asks: when things go wrong — and they will — how quickly and completely can the system recover?</p>
+            <p><strong>The 4-Phase Resilience Model applied to Usaruna's payment flow:</strong></p>
+            <ul>
+              <li><strong>Recognition:</strong> How does Usaruna detect that the payment gateway (Moyasar) is down? I designed a watchdog timer — if the backend receives no response from Moyasar within 5 seconds, it flags the service as unavailable and switches to graceful degradation mode.</li>
+              <li><strong>Resistance:</strong> During a Moyasar outage, orders are queued locally. Buyers see "Payment processing — you will be notified shortly" rather than an error. The system maintains the critical service (order capture) even if payment cannot be completed immediately.</li>
+              <li><strong>Recovery:</strong> When Moyasar comes back online, the queue is processed in order. Idempotency keys ensure no duplicate charges occur during retry.</li>
+              <li><strong>Reinstatement:</strong> Transaction logs are reconciled. Sellers and buyers receive confirmation notifications. System returns to normal operating state.</li>
+            </ul>
+            <p><strong>The Swiss Cheese Model applied to Usaruna's security layers:</strong> A single security mechanism is a single point of failure. I documented Usaruna's layered defenses: (1) Supabase authentication prevents unauthorized access; (2) RLS policies prevent authorized users from accessing other users' data; (3) API input validation prevents SQL injection; (4) Moyasar handles payment tokenization so we never see raw card data. An attacker must breach all four layers — the "holes" in each layer don't align, so a failure in one doesn't mean total compromise.</p>
+            <p><strong>Sociotechnical Resilience insight:</strong> Resilience is not just about technology — it's about People + Technology working together. For Usaruna, this means: our admin dashboard must make it easy for a human operator to identify suspicious seller behavior and suspend accounts quickly. If the admin interface is too complex to act on quickly, the human layer fails — and no technical control can compensate.</p>
+            <p>The most important warning from this topic: <strong>"Too much automation can reduce resilience."</strong> Over-relying on automated systems erodes the human skills needed to handle complex problems. For Usaruna, this means keeping a manual override path for the admin — a human can always step in when automated fraud detection gives a false positive.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK 11-12 -->
+      <div class="week-card">
+        <div class="week-header">
+          <span class="week-num">WEEK 11–12</span>
+          <div class="week-title-wrap">
+            <div class="week-class-tag">GROUP PHASE · Architecture, Software Reuse & Distributed Systems</div>
+            <div class="week-main-title">Component-Based SE · Reuse Strategy · System Architecture V1 · Distributed Design Patterns</div>
+            <div class="week-topics">Topics: Reuse is a reliability strategy, not laziness — every reused component has already been tested at scale</div>
+          </div>
+        </div>
+        <div class="week-body">
+          <div class="evidence-label">My Evidence (V1) — My Individual Contribution to Usaruna V1</div>
+          <div class="evidence-content">
+            <p>My specific individual role in this phase: I documented the <strong>software reuse rationale</strong> for Usaruna's architecture and argued for the separation of our Node.js backend from the Supabase BaaS layer. Both were engineering decisions I justified, not just choices we made.</p>
+            <p><strong>Why I chose each reused component — justified from a dependability perspective:</strong></p>
+            <ul>
+              <li><strong>Supabase Auth (replacing custom JWT):</strong> Building a custom JWT authentication system is an Application Security risk — it introduces exploitable code and misuse of cryptography if done incorrectly. Supabase Auth is a battle-tested component that has already passed the "exploitable code" test at scale. The guideline from the security module: "Application Security — the Engineering Problem is exploitable code." Reusing Supabase Auth eliminates this entire vulnerability class from our attack surface.</li>
+              <li><strong>Moyasar API (replacing manual payment handling):</strong> We handle real SAR transactions. Building our own payment processor would require achieving PCI DSS compliance independently — an infeasible engineering cost for a student project. By reusing Moyasar, we inherit their compliance. This is the "Security Control Funnel" — we're using Exposure Limitation: if a breach happens at the payment layer, Moyasar's tokenization contains the damage.</li>
+              <li><strong>React + Vite (replacing vanilla JS):</strong> Component-based architecture directly maps to the course's "Fault Avoidance" strategy — by creating reusable UI components, I reduce the surface area for human error in the frontend. A bug fixed in the ProductCard component is fixed everywhere it appears, not just in one place.</li>
+            </ul>
+            <p><strong>Architecture decision — why I separated Node.js from Supabase:</strong> If we connect the frontend directly to Supabase, business logic leaks into the client — pricing rules, access control, and order state machines become exposed. The Node.js layer acts as our "Application-level" security control (from the layered protection model covered in the security module): it enforces business rules, validates all inputs before they reach the database, and acts as the single point where we can add logging for audit trails. This is Defense in Depth — the attacker must breach the frontend, then the API, then the database RLS, to compromise data.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK 13-14 -->
+      <div class="week-card">
+        <div class="week-header">
+          <span class="week-num">WEEK 13–14</span>
+          <div class="week-title-wrap">
+            <div class="week-class-tag">GROUP PHASE · Verification, Validation & Testing</div>
+            <div class="week-main-title">V&V Evidence · Testing Strategies · The Dependability Case · Evidence Triangulation</div>
+            <div class="week-topics">Topics: Screenshots ≠ Runtime Evidence unless traceable to a log · Every claim must be supported by evidence</div>
+          </div>
+        </div>
+        <div class="week-body">
+          <div class="evidence-label">My Evidence (V1) — Planned & In Progress</div>
+          <div class="evidence-content">
+            <p>The course material defines the <strong>Dependability Case</strong> as a triangle of three evidence types: Design Evidence (architecture records and specs), Process Evidence (code reviews and V&V logs), and Runtime Evidence (incident logs and failure counts). It explicitly states: "Screenshots ≠ Runtime Evidence unless traceable to a log." This completely changed how I planned to document Usaruna's testing.</p>
+            <p>For Usaruna, my planned V&V evidence for the checkout flow:</p>
+            <ul>
+              <li><strong>Design Evidence:</strong> The Fault Tree Analysis I created for the Order Completion Failure scenario (documented in the Project section of this portfolio). This is my architectural record of what can go wrong and why.</li>
+              <li><strong>Process Evidence:</strong> I will document the code review checklist I apply to every pull request on the payment module — specifically checking for: timeout handlers on all external API calls, exception handling that logs to our audit trail, and idempotency key implementation.</li>
+              <li><strong>Runtime Evidence:</strong> During testing, I will capture Supabase transaction logs showing successful and failed payment attempts — traceable logs, not screenshots. The POFOD metric will be calculated from these logs: (failed_checkouts / total_checkout_attempts).</li>
+            </ul>
+            <p>The course's 8 Commandments of Reliability that I am directly applying in my code contributions to Usaruna: Commandment 2 (Validate All Inputs — never trust the client-submitted price), Commandment 3 (Handle All Exceptions — no silent failures in payment calls), Commandment 7 (Include Timeouts — assume external calls will hang), and Commandment 5 (Restart Capabilities — allow the system to recover order state after a payment failure).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK 15-16 -->
+      <div class="week-card">
+        <div class="week-header">
+          <span class="week-num">WEEK 15–16</span>
+          <div class="week-title-wrap">
+            <div class="week-class-tag">FINAL HARVEST · The Final Proof</div>
+            <div class="week-main-title">V2 Iteration · Final Integration · Portfolio Compilation · Presentation</div>
+            <div class="week-topics">Topics: Dependability = Technical Engineering + Human Responsibility · "Build Your Proof."</div>
+          </div>
+        </div>
+        <div class="week-body">
+          <div class="evidence-label">My Evidence — To be completed in V2</div>
+          <div class="evidence-content">
+            <p>The course closes with a statement I want to carry into my career: <strong>"Dependability = Technical Engineering + Human Responsibility."</strong> The final iteration of this portfolio will document what changed between V1 and V2 — not just in the project, but in how I think.</p>
+            <p><em>[To be written after completing Iteration 2. I plan to document: (1) what I would do differently in Usaruna's architecture based on the V1 class discussion feedback, (2) my final POFOD measurement from runtime testing, (3) one thing I was wrong about in V1 and how I corrected it — because the ability to iterate on your own thinking is what separates an engineer from a programmer.]</em></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PROJECT ── -->
+  <section id="project">
+    <div class="section-tag">// 03 · capstone project</div>
+    <h2 class="section-title">🚀 Usaruna Platform — أسرنا</h2>
+    <div class="divider"></div>
+
+    <div class="project-banner">
+      <div class="project-name">Usaruna | أسرنا</div>
+      <div class="project-tagline">Empowering Family Businesses — E-commerce Marketplace for Saudi Arabia</div>
+      <div class="project-meta">
+        <span class="meta-badge domain">Domain: E-Commerce Marketplace (B2C & B2B)</span>
+        <span class="meta-badge team">Team: 5 Members · Iteration 1</span>
+      </div>
+      <p class="project-desc">Many family businesses in Saudi Arabia rely on informal channels like WhatsApp and Instagram to sell their products. This creates trust issues, poor order management, limited visibility, and insecure payment handling. <strong>Usaruna</strong> is a web-based marketplace connecting productive families with customers through a secure, organized, and logistically integrated platform — supporting Vision 2030's goal of empowering local entrepreneurship.</p>
+    </div>
+
+    <!-- Dependability Metrics -->
+    <div class="section-tag" style="margin-bottom:1rem;">// dependability attributes</div>
+    <div class="dep-grid">
+      <div class="dep-card">
+        <div class="dep-icon">⏱</div>
+        <div class="dep-title">Availability</div>
+        <div class="dep-value">99.9% Uptime Target</div>
+        <div class="dep-desc">Platform must be online 24/7 — every hour offline costs sellers real income. Cloud hosting with load balancing ensures continuous service.</div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-icon">🛡</div>
+        <div class="dep-title">Reliability</div>
+        <div class="dep-value">POFOD &lt; 0.001</div>
+        <div class="dep-desc">Orders, payments, and product data must be processed correctly every time. Idempotency keys prevent duplicate transactions.</div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-icon">⚕</div>
+        <div class="dep-title">Safety</div>
+        <div class="dep-value">ALARP Applied</div>
+        <div class="dep-desc">Prevents harmful listings — unsafe food products, missing allergen warnings, and counterfeit goods are caught before publish.</div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-icon">🔒</div>
+        <div class="dep-title">Security</div>
+        <div class="dep-value">Supabase RLS + Moyasar</div>
+        <div class="dep-desc">Strict data encryption, Row Level Security policies, and tokenized payment handling via Moyasar's PCI-compliant gateway.</div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-icon">🔄</div>
+        <div class="dep-title">Resilience</div>
+        <div class="dep-value">Graceful Degradation</div>
+        <div class="dep-desc">If Moyasar is down, transactions are queued and users are notified. The system recovers without data loss or duplicate charges.</div>
+      </div>
+    </div>
+
+    <!-- Architecture -->
+    <div class="section-tag" style="margin-bottom:1rem;">// system architecture (v1)</div>
+    <div class="arch-grid">
+      <div class="arch-card">
+        <h4><span>⚛</span> Frontend Layer</h4>
+        <p>React.js & Vite with Tailwind CSS for responsive design. Component-based architecture ensures UI elements (product cards, checkout flow, seller dashboard) are reusable across screens without duplicating logic.</p>
+      </div>
+      <div class="arch-card">
+        <h4><span>⚙</span> Backend Layer</h4>
+        <p>Node.js with Express.js handles business logic routing and external API orchestration. Decoupled from the database layer to allow independent scaling and state machine logic for orders.</p>
+      </div>
+      <div class="arch-card">
+        <h4><span>🗄</span> Database Layer</h4>
+        <p>Supabase (PostgreSQL) as a BaaS — provides Database, secure Authentication, and Row Level Security. Each user role (buyer, seller, admin) has enforced data access boundaries.</p>
+      </div>
+      <div class="arch-card">
+        <h4><span>🔗</span> External Services</h4>
+        <p>Moyasar (payments), Supabase Storage (product images), Google Maps API (delivery routing). All service-oriented components — replaceable without affecting internal business logic.</p>
+      </div>
+    </div>
+
+    <!-- Reused Components -->
+    <div class="section-tag" style="margin-bottom:1rem;">// software reuse strategy</div>
+    <div class="reuse-grid" style="margin-bottom:3rem;">
+      <div class="reuse-card"><h4>React & Vite</h4><p>Core SPA framework — eliminates full-page reloads, improves UX for marketplace browsing.</p></div>
+      <div class="reuse-card"><h4>Tailwind CSS</h4><p>Utility-first framework replacing manual CSS — cuts UI development time significantly.</p></div>
+      <div class="reuse-card"><h4>Supabase Auth</h4><p>Battle-tested authentication with RLS — avoids the security pitfalls of custom JWT implementation.</p></div>
+      <div class="reuse-card"><h4>Supabase Storage</h4><p>Secure object storage for product images — scalable without managing our own file server.</p></div>
+      <div class="reuse-card"><h4>Moyasar API</h4><p>Saudi-localized payment gateway — inherits their PCI compliance instead of achieving it ourselves.</p></div>
+      <div class="reuse-card"><h4>Google Maps API</h4><p>Delivery routing and address geocoding — precise logistics without building routing algorithms.</p></div>
+    </div>
+
+    <!-- FTA -->
+    <div class="section-tag" style="margin-bottom:1rem;">// fault tree analysis</div>
+    <div class="fta-container">
+      <div class="fta-title">⚠ Critical Failure Scenario: Order Completion Failure</div>
+      <div class="fta-tree">
+        <div class="fta-node top">⚠ TOP EVENT<br/><small>Order Completion Failure</small></div>
+        <div class="fta-line"></div>
+        <div class="fta-gate">OR</div>
+        <div class="fta-line"></div>
+        <div class="fta-row">
+          <div class="fta-branch">
+            <div class="fta-node cause">Cause 1<br/><small>Payment Gateway Down<br/>(Moyasar Unavailable)</small></div>
+          </div>
+          <div style="width:80px;height:2px;background:var(--muted);margin-top:22px;"></div>
+          <div class="fta-branch">
+            <div class="fta-node cause">Cause 2<br/><small>Database Connection Lost<br/>(Supabase Timeout)</small></div>
+          </div>
+        </div>
+        <div class="fta-line" style="margin-top:1.5rem;"></div>
+        <div class="fta-node mitigation">✅ Mitigation: System redundancy, idempotency keys, fallback exception handling, transaction queuing</div>
+      </div>
+    </div>
+
+    <!-- ALARP -->
+    <div class="section-tag" style="margin-bottom:1rem;">// alarp risk model</div>
+    <div class="alarp-grid" style="margin-bottom:3rem;">
+      <div class="alarp-card intolerable">
+        <h4>🚫 Unacceptable Risk</h4>
+        <p>Payment data leak — unauthorized access to buyer payment information or seller banking details.</p>
+        <div class="mitigation-text">Mitigation: Strict tokenization via Moyasar + Supabase RLS policies. Must be designed out entirely.</div>
+      </div>
+      <div class="alarp-card region">
+        <h4>⚖ ALARP Region</h4>
+        <p>System downtime & delivery delays — acceptable with conditions during peak traffic periods.</p>
+        <div class="mitigation-text">Mitigation: Smart delivery routing algorithms + reliable cloud hosting. Cannot be eliminated, but must be minimized.</div>
+      </div>
+      <div class="alarp-card acceptable">
+        <h4>✅ Acceptable Risk</h4>
+        <p>Fake or unfair reviews — a seller receiving an unjustified negative rating from a bad-faith buyer.</p>
+        <div class="mitigation-text">Mitigation: Only verified buyers who completed a purchase can leave reviews. Risk is tolerable by platform standards.</div>
+      </div>
+    </div>
+
+    <!-- Individual Contribution -->
+    <div class="individual-box">
+      <h3>👤 My Individual Role in Iteration 1</h3>
+      <p>In the V1 phase of Usaruna, I had three specific contributions that I can trace and defend individually:</p>
+      <p><strong>1 — Fault Tree Analysis (FTA) design for the Order Completion Failure scenario.</strong> I identified that the two root causes of order failure — payment gateway downtime and database connection loss — are independent events. This means an OR gate is the correct logical operator in the fault tree, and each cause must be mitigated separately. I proposed idempotency keys on all Moyasar API calls as the primary mitigation for Cause 1, and Supabase's built-in connection retry logic as the mitigation for Cause 2.</p>
+      <p><strong>2 — Software reuse rationale documentation.</strong> I wrote the justification for why we chose Supabase Auth over a custom JWT system, and why we use Moyasar as a black-box payment component rather than building our own payment handler. The reasoning was not "it's easier" — it was that reuse eliminates entire vulnerability classes from our attack surface and lets us inherit third-party compliance (PCI DSS via Moyasar) we could not achieve independently at this stage.</p>
+      <p><strong>3 — Architecture argument for separating Node.js from Supabase.</strong> I argued against connecting the React frontend directly to Supabase, because doing so would expose business logic (pricing rules, access control, order state machines) to the client. The Node.js layer enforces all business rules server-side and provides a single point for audit logging — which is Defense in Depth applied to our architecture.</p>
+    </div>
+
+    <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="https://github.com/Rami-Alieli/CPIT-455-Portfolio" target="_blank" class="contact-btn">💻 GitHub Portfolio →</a>
+      <a href="#" class="contact-btn">▶ Prototype Demo →</a>
+    </div>
+  </section>
+
+  <!-- ── GRADUATION PROJECT ── -->
+  <section id="graduation" style="background: #0d1e3a40;">
+    <div class="section-tag">// 04 · graduation project</div>
+    <h2 class="section-title">🎓 ثمنها — Car Price Intelligence Platform</h2>
+    <div class="divider"></div>
+
+    <div class="project-banner" style="background: linear-gradient(135deg, #1a1a2e, #16213e); border-color: var(--gold);">
+      <div style="position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#f5a62310,transparent 70%);pointer-events:none;"></div>
+      <div class="project-name" style="color: var(--gold);">ثمنها · Thamanuha</div>
+      <div class="project-tagline">AI-Powered Car Price Estimation for the Saudi Arabian Market</div>
+      <div class="project-meta">
+        <span class="meta-badge domain" style="color:var(--gold);border-color:var(--gold);background:var(--gold-dim);">Domain: AI / Automotive / FinTech</span>
+        <span class="meta-badge team">Type: Graduation Project · 2026</span>
+        <span class="meta-badge" style="color:#a78bfa;border-color:#a78bfa;background:#a78bfa15;">Status: Live 🟢</span>
+      </div>
+      <p class="project-desc">Many car buyers and sellers in Saudi Arabia struggle to determine fair market prices — relying on guesswork, word of mouth, or fragmented data from social media. <strong>ثمنها</strong> solves this by providing instant, data-driven car price estimates based on make, model, year, mileage, and accident history. It also includes a marketplace for buying and selling vehicles, budget-based search, and an admin dashboard — all designed specifically for the Saudi market.</p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="section-tag" style="margin-bottom:1rem;">// core features</div>
+    <div class="dep-grid" style="margin-bottom:3rem;">
+      <div class="dep-card" style="border-color:#a78bfa40;">
+        <div class="dep-icon">📊</div>
+        <div class="dep-title" style="color:#a78bfa;">Price Estimator</div>
+        <div class="dep-value" style="color:var(--gold);">AI-Driven</div>
+        <div class="dep-desc">Calculates current market value based on real data — brand, model, year, mileage, and accident history input by the user.</div>
+      </div>
+      <div class="dep-card" style="border-color:#a78bfa40;">
+        <div class="dep-icon">💰</div>
+        <div class="dep-title" style="color:#a78bfa;">Budget Search</div>
+        <div class="dep-value" style="color:var(--gold);">Smart Filtering</div>
+        <div class="dep-desc">Users set a budget range and the system surfaces available cars that fit — eliminating manual browsing across fragmented platforms.</div>
+      </div>
+      <div class="dep-card" style="border-color:#a78bfa40;">
+        <div class="dep-icon">🏷️</div>
+        <div class="dep-title" style="color:#a78bfa;">Marketplace</div>
+        <div class="dep-value" style="color:var(--gold);">B2C Listings</div>
+        <div class="dep-desc">Sellers list their cars with photos, price, and location. Buyers can browse, comment, and open private chats directly on the platform.</div>
+      </div>
+      <div class="dep-card" style="border-color:#a78bfa40;">
+        <div class="dep-icon">🛡️</div>
+        <div class="dep-title" style="color:#a78bfa;">Admin Dashboard</div>
+        <div class="dep-value" style="color:var(--gold);">Full Oversight</div>
+        <div class="dep-desc">Owner-only control panel showing total users, listings, comments, city activity heatmap, and top brands — real-time platform analytics.</div>
+      </div>
+      <div class="dep-card" style="border-color:#a78bfa40;">
+        <div class="dep-icon">💬</div>
+        <div class="dep-title" style="color:#a78bfa;">Private Messaging</div>
+        <div class="dep-value" style="color:var(--gold);">Real-time Chat</div>
+        <div class="dep-desc">Buyers and sellers communicate privately within the platform — no need to share personal numbers publicly.</div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="section-tag" style="margin-bottom:1rem;">// tech stack & architecture</div>
+    <div class="arch-grid" style="margin-bottom:3rem;">
+      <div class="arch-card" style="border-color:#a78bfa40;">
+        <h4><span style="color:#a78bfa;">🖥</span> Frontend</h4>
+        <p>Vanilla HTML, CSS, and JavaScript — a deliberate choice for a lightweight, fast-loading single-page application that works smoothly on all devices including low-bandwidth connections common in rural Saudi areas.</p>
+      </div>
+      <div class="arch-card" style="border-color:#a78bfa40;">
+        <h4><span style="color:#a78bfa;">🗄</span> Backend & Database</h4>
+        <p>Firebase (Firestore + Auth + Storage) as the BaaS layer — handles real-time data sync for listings and chat, user authentication, and image storage for car photos. Chosen for its real-time capabilities over a REST-only approach.</p>
+      </div>
+      <div class="arch-card" style="border-color:#a78bfa40;">
+        <h4><span style="color:#a78bfa;">🤖</span> Price Estimation Engine</h4>
+        <p>Rule-based pricing model trained on Saudi market data — calculates estimated value from brand, model, year, mileage, and accident history. Outputs a price range and remaining value percentage vs. agency price.</p>
+      </div>
+      <div class="arch-card" style="border-color:#a78bfa40;">
+        <h4><span style="color:#a78bfa;">🌍</span> Localization</h4>
+        <p>Fully Arabic-first UI with RTL layout support. Cities, brands, and models are localized for the Saudi market. The platform also supports English switching — making it accessible to expat buyers and sellers.</p>
+      </div>
+    </div>
+
+    <!-- What I learned box -->
+    <div class="individual-box" style="background: linear-gradient(135deg, #f5a62310, transparent); border-color: #f5a62350;">
+      <h3 style="color:var(--gold);">💡 Engineering Reflection — What ثمنها Taught Me</h3>
+      <p>Building ثمنها was the first time I took a project from zero to a live, publicly accessible URL. The most challenging engineering decision was the <strong>price estimation model</strong> — I had to decide between a machine learning approach and a rule-based system. I chose rule-based because our dataset of Saudi car prices was not large enough for an ML model to generalize reliably. That decision taught me that the "smarter" solution is not always the right one — correctness of output matters more than sophistication of method. I also learned that real-time features (chat, notifications) require a fundamentally different architecture than request-response systems, which is why Firebase's Firestore was the right choice over a traditional REST API with polling.</p>
+    </div>
+
+    <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="https://azzamalghamdiit.github.io/GraduationProject/" target="_blank" class="contact-btn" style="border-color:var(--gold);color:var(--gold);background:var(--gold-dim);">▶ Live Demo →</a>
+      <a href="https://github.com/Rami-Alieli" target="_blank" class="contact-btn">💻 GitHub →</a>
+    </div>
+  </section>
+
+  <!-- ── CPIT-405 PROJECT ── -->
+  <section id="kashta" style="background: #0d1e3a40;">
+    <div class="section-tag">// 05 · cpit-405 project</div>
+    <h2 class="section-title">🏕 كشتة تراكر — Kashta Tracker</h2>
+    <div class="divider"></div>
+
+    <div class="project-banner" style="background: linear-gradient(135deg, #1a1200, #1f1600); border-color: #c98a3a60;">
+      <div style="position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#c98a3a12,transparent 70%);pointer-events:none;"></div>
+      <div class="project-name" style="color: #c98a3a;">كشتة تراكر · Kashta Tracker</div>
+      <div class="project-tagline">Plan Your Outdoor Adventures with Live Weather & Smart Gear Checklists</div>
+      <div class="project-meta">
+        <span class="meta-badge" style="color:#c98a3a;border-color:#c98a3a;background:#c98a3a15;">Domain: Outdoor / Travel / Utility</span>
+        <span class="meta-badge team">Course: CPIT-405 · Mobile & Web Apps</span>
+        <span class="meta-badge" style="color:#81c784;border-color:#81c784;background:#81c78415;">Status: Live 🟢</span>
+      </div>
+      <p class="project-desc">Camping and outdoor trips ("كشتات") are a deeply embedded part of Saudi culture — especially during winter. But planning them is scattered: weather checked on one app, gear lists written on paper, locations shared over WhatsApp. <strong>كشتة تراكر</strong> brings it all together in one place — real-time weather data for your destination, customizable smart gear checklists, and trip planning tools built specifically for the Saudi outdoor experience.</p>
+    </div>
+
+    <!-- Features -->
+    <div class="section-tag" style="margin-bottom:1rem;">// core features</div>
+    <div class="dep-grid" style="margin-bottom:3rem;">
+      <div class="dep-card" style="border-color:#c98a3a40;">
+        <div class="dep-icon">🌤</div>
+        <div class="dep-title" style="color:#c98a3a;">Live Weather</div>
+        <div class="dep-value" style="color:#f5a623;">Real-Time API</div>
+        <div class="dep-desc">Fetches live weather conditions for the trip destination — temperature, wind, humidity — so you pack the right gear before you leave.</div>
+      </div>
+      <div class="dep-card" style="border-color:#c98a3a40;">
+        <div class="dep-icon">🎒</div>
+        <div class="dep-title" style="color:#c98a3a;">Smart Gear Lists</div>
+        <div class="dep-value" style="color:#f5a623;">Customizable</div>
+        <div class="dep-desc">Pre-built and editable checklists for different trip types — desert, mountain, beach. Never forget a tent peg again.</div>
+      </div>
+      <div class="dep-card" style="border-color:#c98a3a40;">
+        <div class="dep-icon">📍</div>
+        <div class="dep-title" style="color:#c98a3a;">Trip Planning</div>
+        <div class="dep-value" style="color:#f5a623;">Organized</div>
+        <div class="dep-desc">Create and manage multiple trips, set dates, add notes, and track preparation status — all in one organized dashboard.</div>
+      </div>
+      <div class="dep-card" style="border-color:#c98a3a40;">
+        <div class="dep-icon">🇸🇦</div>
+        <div class="dep-title" style="color:#c98a3a;">Saudi-First</div>
+        <div class="dep-value" style="color:#f5a623;">Arabic UI</div>
+        <div class="dep-desc">Fully Arabic interface with RTL layout, designed around Saudi camping culture and local geography — not a generic travel app.</div>
+      </div>
+    </div>
+
+    <!-- Tech + Reflection -->
+    <div class="arch-grid" style="margin-bottom:2rem;">
+      <div class="arch-card" style="border-color:#c98a3a40;">
+        <h4><span style="color:#c98a3a;">⚙</span> Tech Stack</h4>
+        <p>Built with <strong>HTML, CSS, and JavaScript</strong> as a CPIT-405 web application project. Integrates a live weather API for real-time data fetching. Responsive design for mobile use — since most users will access it on their phones while planning trips.</p>
+      </div>
+      <div class="arch-card" style="border-color:#c98a3a40;">
+        <h4><span style="color:#c98a3a;">🔗</span> Key Engineering Decision</h4>
+        <p>The core challenge was deciding how to handle <strong>offline use</strong> — users in remote desert areas may lose connectivity. The solution was storing checklist state in <strong>localStorage</strong> so the app remains functional without a network connection, only syncing weather data when online.</p>
+      </div>
+    </div>
+
+    <div class="individual-box" style="background: linear-gradient(135deg, #c98a3a10, transparent); border-color: #c98a3a40;">
+      <h3 style="color:#c98a3a;">💡 What This Project Taught Me</h3>
+      <p>كشتة تراكر was one of my first projects where I designed for a <strong>specific cultural context</strong>, not just a generic use case. Building for Saudi camping culture meant thinking about Arabic RTL layouts from day one, not as an afterthought. It also taught me the importance of <strong>offline-first thinking</strong> — a weather app is useless if it crashes when you're already at your campsite with no signal. This was my introduction to the idea that reliability isn't just about server uptime; it's about how your app behaves when the environment fails around it.</p>
+    </div>
+
+    <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="https://rami-alieli.github.io/CPIT-405-PROJECT/" target="_blank" class="contact-btn" style="border-color:#c98a3a;color:#c98a3a;background:#c98a3a15;">▶ Live Demo →</a>
+      <a href="https://github.com/rami-alieli/CPIT-405-PROJECT" target="_blank" class="contact-btn">💻 GitHub Repository →</a>
+    </div>
+  </section>
+
+  <!-- ── REFLECTION ── -->
+  <section id="reflection" style="background: #0a1628;">
+    <div class="section-tag">// 06 · h-stack reflection</div>
+    <h2 class="section-title">🧠 H-Stack Reflection</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">This section demonstrates growth mindset and engineering maturity. Authentic, specific, and honest.</p>
+
+    <div class="hstack-grid" style="margin-bottom:3rem;">
+      <div class="hstack-card">
+        <div class="icon">📈</div>
+        <h4>Market Mindset</h4>
+        <p>Delivery quality · Documentation · Iteration</p>
+      </div>
+      <div class="hstack-card">
+        <div class="icon">🔍</div>
+        <h4>Evidence-First</h4>
+        <p>From "I know" → "I can prove"</p>
+      </div>
+      <div class="hstack-card">
+        <div class="icon">📢</div>
+        <h4>Communication</h4>
+        <p>Clarity expected in industry</p>
+      </div>
+      <div class="hstack-card">
+        <div class="icon">⚡</div>
+        <h4>Consistency</h4>
+        <p>Discipline · Commitment to rhythm</p>
+      </div>
+    </div>
+
+    <div class="reflection-grid">
+      <div class="reflect-card">
+        <h4>❓ What changed in how I think?</h4>
+        <blockquote>"Before HIMMA, I thought software engineering meant writing code that works. Now I understand it means building systems that can be trusted — and trust requires proof, not just functionality. Every design decision I make now starts with the question: 'How would I defend this to someone whose safety depends on it?'"</blockquote>
+      </div>
+      <div class="reflect-card">
+        <h4>📈 My biggest V1 insight</h4>
+        <blockquote>"Working on Usaruna's FTA, I realized that listing five dependability attributes is trivial — applying them to a real system with real trade-offs is where engineering actually happens. You can't have infinite availability AND infinite security without infinite budget. You have to choose, justify, and document."</blockquote>
+      </div>
+      <div class="reflect-card">
+        <h4>⚖ Safety vs Reliability</h4>
+        <blockquote>"A system can be perfectly reliable — executing its specification 100% of the time — and still cause harm if the specification itself is wrong. Safety is about what the system should never do, regardless of the spec. A payment system that reliably charges the wrong amount is reliable but not safe."</blockquote>
+      </div>
+      <div class="reflect-card">
+        <h4>💼 What I carry into my career</h4>
+        <blockquote>"The burden of proof is on the engineer. In safety engineering, you are guilty until proven innocent — you must demonstrate your system won't fail, not just hope that it won't. I will never ship a critical feature without a documented risk analysis. HIMMA gave me that standard."</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="contact-section">
+    <div class="section-tag">// 07 · contact</div>
+    <h2 class="section-title">🤝 Let's Connect</h2>
+    <div class="divider"></div>
+    <p style="color:var(--muted); font-size:.88rem; max-width:480px;">Build Your Network. Build Your Future. Reach out via professional channels.</p>
+    <div class="contact-grid">
+      <a href="mailto:raleili@stu.kau.edu.sa" class="contact-btn primary">✉ raleili@stu.kau.edu.sa</a>
+      <a href="https://github.com/Rami-Alieli/CPIT-455-Portfolio" target="_blank" class="contact-btn">💻 GitHub Portfolio</a>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span>HIMMA</span> | BUILD YOUR PROOF &nbsp;·&nbsp;
+    © 2026 — Rami Jameel AlIeli · CPIT-455 Portfolio &nbsp;·&nbsp;
+    <span>2244105</span> &nbsp;·&nbsp;
+    King Abdulaziz University · Faculty of Computing &nbsp;·&nbsp;
+    Last Updated: May 2026 — Version 1.0
+  </footer>
+
+</body>
+</html>
